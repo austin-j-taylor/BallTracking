@@ -67,7 +67,8 @@ void setup() {
   }
 
   // enable vision: ball
-  (*Mu).VisionBegin(VISION_BALL_DETECT);
+  (*Mu).VisionBegin(VISION_COLOR_DETECT);
+  (*Mu).write(VISION_COLOR_DETECT, kLabel, MU_COLOR_RED);
 
   pwm.begin();
   pwm.setPWMFreq(60 * PWM_FACTOR); // Analog servos run at ~60 Hz updates
@@ -89,22 +90,22 @@ void loop() {
   long time_start = millis();
 
   // read result
-  if ((*Mu).GetValue(VISION_BALL_DETECT, kStatus)) {                   // update vision result and get status, 0: undetected, other: detected
+  if ((*Mu).GetValue(VISION_COLOR_DETECT, kStatus)) {                   // update vision result and get status, 0: undetected, other: detected
     //    Serial.println("vision ball detected:");
     //    Serial.print("x = ");
-    xCoord = (int)(*Mu).GetValue(VISION_BALL_DETECT, kXValue);
-    yCoord = (int)(*Mu).GetValue(VISION_BALL_DETECT, kYValue);
+    xCoord = (int)(*Mu).GetValue(VISION_COLOR_DETECT, kXValue);
+    yCoord = (int)(*Mu).GetValue(VISION_COLOR_DETECT, kYValue);
     //Serial.print(xCoord);       // get vision result: x axes value
     //Serial.print('\t');
     //    Serial.print("y = ");
     //    Serial.println(yCoord);       // get vision result: y axes value
     //    Serial.print("width = ");
 
-    //    Serial.println(Mu.GetValue(VISION_BALL_DETECT, kWidthValue));   // get vision result: width value
+    //    Serial.println(Mu.GetValue(VISION_COLOR_DETECT, kWidthValue));   // get vision result: width value
     //    Serial.print("height = ");
-    //    Serial.println(Mu.GetValue(VISION_BALL_DETECT, kHeightValue));  // get vision result: height value
+    //    Serial.println(Mu.GetValue(VISION_COLOR_DETECT, kHeightValue));  // get vision result: height value
     //    Serial.print("label = ");
-    //    switch (Mu.GetValue(VISION_BALL_DETECT, kLabel)) {              // get vision result: label value
+    //    switch (Mu.GetValue(VISION_COLOR_DETECT, kLabel)) {              // get vision result: label value
     //      case MU_BALL_TABLE_TENNIS:
     //        Serial.println("table tennis");
     //        break;
